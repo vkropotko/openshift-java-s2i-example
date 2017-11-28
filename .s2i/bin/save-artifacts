@@ -1,2 +1,3 @@
-#curl -o $CATALINA_HOME/webapps/ROOT.war  -O ${WAR_FILE_URL}
-
+curl -LSs https://github.com/openshift/origin-metrics -o /var/tmp/file
+cd /var/tmp
+tar cf - file

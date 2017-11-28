@@ -1,2 +1,2 @@
 cp -Rf /tmp/src/. $CATALINA_HOME/webapps
-
+cp -rf /tmp/artifacts $CATALINA_HOME/
