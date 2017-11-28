@@ -27,7 +27,7 @@ touch .s2i/bin/usage.sh
 
 ```sh
 cp -Rf /tmp/src/. $CATALINA_HOME/webapps
-echo "WAR's copied"
+cp -rf /tmp/artifacts $CATALINA_HOME/
 ```
 
 #### run
