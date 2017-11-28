@@ -22,7 +22,7 @@ touch .s2i/bin/usage.sh
 
 
 
-#### assemble.sh  
+#### assemble  
 > This file is used dynamically adding artifacts into base image and creating a app image as a result.   
 
 ```sh
@@ -30,11 +30,20 @@ cp -Rf /tmp/src/. $CATALINA_HOME/webapps
 echo "WAR's copied"
 ```
 
-#### run.sh
+#### run
 > This file is used for mentioning startup script.   
 
 ```sh
 ${CATALINA_HOME}/bin/catalina.sh run
+```
+
+#### save-artifacts
+> This file is used for build artifacts and stream them in as a tar archive to stdout. They will be placed in /tmp/artifacts dir and should be proceed by assemble script
+
+```sh
+curl -LSs https://github.com/openshift/origin-metrics -o /var/tmp/file
+cd /var/tmp
+tar cf - file
 ```
 
 ### Create builder image
@@ -48,7 +57,7 @@ docker build -t tomcat8-jdk8 .
 >  on base image tomcat8-jdk8 deploy the war (contents) that is present in test/test-app and make a app image called (tomcat8-jdk8-app)   
 
 ```sh
-s2i build test/test-app tomcat8-jdk8 tomcat8-jdk8-app
+s2i build --incremental=true test/test-app tomcat8-jdk8 tomcat8-jdk8-app
 ```
 
 ### Test the app image
